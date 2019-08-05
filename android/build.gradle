@@ -21,6 +21,7 @@ apply plugin: 'com.android.library'
 
 android {
   compileSdkVersion safeExtGet('compileSdkVersion', 28)
+  supportLibVersion safeExtGet('supportLibVersion', '28.0.3')
   buildToolsVersion safeExtGet('buildToolsVersion', '28.0.3')
 
     defaultConfig {
