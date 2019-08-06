@@ -1,47 +1,49 @@
-
-def safeExtGet(prop, fallback) {
-    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
-}
-
 buildscript {
     repositories {
         google()
-        maven {
-            url 'https://maven.google.com'
-        }
         jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath 'com.android.tools.build:gradle:3.3.2'
     }
 }
 
 apply plugin: 'com.android.library'
 
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
+
 android {
-  compileSdkVersion safeExtGet('compileSdkVersion', 28)
-  supportLibVersion safeExtGet('supportLibVersion', '28.0.3')
-  buildToolsVersion safeExtGet('buildToolsVersion', '28.0.3')
+    compileSdkVersion safeExtGet('compileSdkVersion', 28)
 
     defaultConfig {
         minSdkVersion safeExtGet('minSdkVersion', 16)
         targetSdkVersion safeExtGet('targetSdkVersion', 28)
-        versionCode 1
-        versionName "1.0"
+
+        versionCode 2
+        versionName "1.1"
     }
     lintOptions {
-        abortOnError false
+       warning 'InvalidPackage', 'MissingPermission'
     }
 }
 
 repositories {
-    mavenCentral()
+    google()
+    maven {
+        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+        url "$rootDir/../node_modules/react-native/android"
+    }
+    jcenter()
 }
 
 dependencies {
-    implementation 'com.facebook.react:react-native:+'
-    implementation "com.android.support:exifinterface:${safeExtGet('supportLibVersion', '28.0.3')}"
-    implementation "com.android.support:support-annotations:${safeExtGet('supportLibVersion', '28.0.3')}"
-    implementation "com.android.support:support-v4:${safeExtGet('supportLibVersion', '28.0.3')}"
+    implementation "com.facebook.react:react-native:${safeExtGet('reactNativeVersion', '+')}"
+    implementation "com.google.android.gms:play-services-gcm:${safeExtGet('googlePlayServicesVersion', '16.1.0')}"
+    //noinspection GradleCompatible
+    implementation "com.android.support:appcompat-v7:${safeExtGet('supportLibVersion', '28.0.0')}"
+    implementation "com.android.support:support-v4:${safeExtGet('supportLibVersion', '28.0.0')}"
+    implementation "com.android.support:support-media-compat:${safeExtGet('supportLibVersion', '28.0.0')}"
 }
