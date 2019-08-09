@@ -53,7 +53,7 @@ public class X509Impl implements X509KeyManager {
 
     // This can be any protocol supported by your target devices.
     // For example "TLSv1.2" is supported by the latest versions of Android
-    final String SSL_PROTOCOL = "TLSv1.2";
+    final static String SSL_PROTOCOL = "TLSv1.2";
 
 
 	public static SSLContext setForConnection(HttpsURLConnection con, Context context, String alias) throws CertificateException, KeyManagementException {
