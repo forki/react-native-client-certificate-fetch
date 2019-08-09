@@ -56,7 +56,8 @@ public class RNClientCertificateFetchModule extends ReactContextBaseJavaModule {
 
   // This can be any protocol supported by your target devices.
   // For example "TLSv1.2" is supported by the latest versions of Android
-  final String SSL_PROTOCOL = "TLS";
+  final String SSL_PROTOCOL = "TLSv1.2";
+
   SSLSocketFactory socketFactory = null;
   SSLContext sslContext = null;
   String TAG = "RNClientCertificateFetchModule";
