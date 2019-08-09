@@ -51,11 +51,16 @@ public class X509Impl implements X509KeyManager {
 	private final X509Certificate[] certChain;
 	private final PrivateKey privateKey;
 
+    // This can be any protocol supported by your target devices.
+    // For example "TLSv1.2" is supported by the latest versions of Android
+    final String SSL_PROTOCOL = "TLSv1.2";
+
+
 	public static SSLContext setForConnection(HttpsURLConnection con, Context context, String alias) throws CertificateException, KeyManagementException {
 		SSLContext sslContext = null;
 		try {
-			sslContext = SSLContext.getInstance("TLS");
-		} catch(NoSuchAlgorithmException e){
+			sslContext = SSLContext.getInstance(SSL_PROTOCOL);
+		} catch(NoSuchAlgorithmException e) {
 			throw new RuntimeException("Should not happen...", e);
 		}
 

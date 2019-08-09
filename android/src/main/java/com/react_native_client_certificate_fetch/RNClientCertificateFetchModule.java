@@ -54,12 +54,6 @@ public class RNClientCertificateFetchModule extends ReactContextBaseJavaModule {
     this.reactContext = reactContext;
   }
 
-  // This can be any protocol supported by your target devices.
-  // For example "TLSv1.2" is supported by the latest versions of Android
-  final String SSL_PROTOCOL = "TLSv1.2";
-
-  SSLSocketFactory socketFactory = null;
-  SSLContext sslContext = null;
   String TAG = "RNClientCertificateFetchModule";
 
 	private String convertInputStreamToString(InputStream inputStream)
@@ -83,7 +77,6 @@ public class RNClientCertificateFetchModule extends ReactContextBaseJavaModule {
       // Tell the URLConnection to use a SocketFactory from our SSLContext
       URL url = new URL(address);
       HttpsURLConnection urlConnection = (HttpsURLConnection)url.openConnection();
-      urlConnection.setSSLSocketFactory(socketFactory);
       X509Impl.setForConnection(urlConnection, reactContext, alias);
       urlConnection.setRequestProperty ("Authorization", basicAuth);
       urlConnection.setRequestMethod("POST");
