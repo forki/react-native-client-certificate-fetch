@@ -65,7 +65,7 @@ public class X509Impl implements X509KeyManager {
 		}
 
 		sslContext.init(new KeyManager[] { fromAlias(context, alias)}, null, null);
-		con.setSSLSocketFactory(TLSSocketFactory(sslContext.getSocketFactory()));
+		con.setSSLSocketFactory(new TLSSocketFactory(sslContext.getSocketFactory()));
 		return sslContext;
 	}
 
