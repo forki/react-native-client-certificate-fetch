@@ -77,6 +77,7 @@ public class RNClientCertificateFetchModule extends ReactContextBaseJavaModule {
       // Tell the URLConnection to use a SocketFactory from our SSLContext
       URL url = new URL(address);
       HttpsURLConnection urlConnection = (HttpsURLConnection)url.openConnection();
+      Log.d(TAG, "Connection created");
       X509Impl.setForConnection(urlConnection, reactContext, alias);
       urlConnection.setRequestProperty ("Authorization", basicAuth);
       urlConnection.setRequestMethod("POST");
