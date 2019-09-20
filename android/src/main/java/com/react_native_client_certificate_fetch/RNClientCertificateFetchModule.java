@@ -70,7 +70,7 @@ public class RNClientCertificateFetchModule extends ReactContextBaseJavaModule {
 
 
   @ReactMethod
-  public void fetchPost(String alias, String address, String basicAuth, String soapAction, String postData, Promise p) {
+  public void fetchPost(String alias, String address, String soapAction, String postData, Promise p) {
     String resultData = "";
 
     try {
@@ -79,7 +79,6 @@ public class RNClientCertificateFetchModule extends ReactContextBaseJavaModule {
       HttpsURLConnection urlConnection = (HttpsURLConnection)url.openConnection();
       Log.d(TAG, "Connection created");
       X509Impl.setForConnection(urlConnection, reactContext, alias);
-      urlConnection.setRequestProperty ("Authorization", basicAuth);
       urlConnection.setRequestMethod("POST");
       urlConnection.setRequestProperty("Content-Type", "text/xml");
       urlConnection.setRequestProperty("SOAPAction", soapAction);
